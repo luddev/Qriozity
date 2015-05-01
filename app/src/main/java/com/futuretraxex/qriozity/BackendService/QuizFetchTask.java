@@ -1,5 +1,6 @@
 package com.futuretraxex.qriozity.BackendService;
 
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import com.futuretraxex.qriozity.Data.Question;
 import com.futuretraxex.qriozity.DataParser.RandomQuestionParsing;
 import com.futuretraxex.qriozity.PlayFragment;
 import com.futuretraxex.qriozity.R;
+import com.futuretraxex.qriozity.Resource.SoundServ;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +25,7 @@ import java.net.URL;
  */
 public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
 
-    public String API_URL = "http://192.168.1.3:3002/";
+    public String API_URL = "http://api.futuretraxex.com/";
     public String API_FETCH_RANDOM = "v1/getRandomQuestion";
 
 
@@ -95,9 +97,11 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
             @Override
             public void onClick(View view) {
                 if(Question.verifyChoice(1) == true)    {
+                    SoundServ.playMusic(true);
                     PlayFragment.PlayView.option1.setBackgroundResource(R.color.green);
                 }
                 else {
+                    SoundServ.playMusic(false);
                     PlayFragment.PlayView.option1.setBackgroundResource(R.color.red);
                     showCorrectAnswer();
                 }
@@ -108,9 +112,11 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
             @Override
             public void onClick(View view) {
                 if(Question.verifyChoice(2) == true)    {
+                    SoundServ.playMusic(true);
                     PlayFragment.PlayView.option2.setBackgroundResource(R.color.green);
                 }
                 else {
+                    SoundServ.playMusic(false);
                     PlayFragment.PlayView.option2.setBackgroundResource(R.color.red);
                     showCorrectAnswer();
                 }
@@ -121,9 +127,11 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
             @Override
             public void onClick(View view) {
                 if(Question.verifyChoice(3) == true)    {
+                    SoundServ.playMusic(true);
                     PlayFragment.PlayView.option3.setBackgroundResource(R.color.green);
                 }
                 else {
+                    SoundServ.playMusic(false);
                     PlayFragment.PlayView.option3.setBackgroundResource(R.color.red);
                     showCorrectAnswer();
                 }
@@ -133,10 +141,11 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
         PlayFragment.PlayView.option4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Question.verifyChoice(4) == true)    {
+                if (Question.verifyChoice(4) == true) {
+                    SoundServ.playMusic(true);
                     PlayFragment.PlayView.option4.setBackgroundResource(R.color.green);
-                }
-                else {
+                } else {
+                    SoundServ.playMusic(false);
                     PlayFragment.PlayView.option4.setBackgroundResource(R.color.red);
                     showCorrectAnswer();
                 }
@@ -145,6 +154,8 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
         });
 
     }
+
+
 
     void showCorrectAnswer()    {
         switch(Question.mAnswer)    {

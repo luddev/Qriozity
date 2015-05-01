@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.futuretraxex.qriozity.BackendService.QuizFetchTask;
+import com.futuretraxex.qriozity.Resource.SoundServ;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,6 +35,7 @@ public class PlayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_play, container, false);
         PlayView.initPlayView(rootView);
+        SoundServ.setContext(getActivity());
         QuizFetchTask qTask = new QuizFetchTask();
         try {
             Log.w("Do In BACKGROUND", "EWxecuting Task");
