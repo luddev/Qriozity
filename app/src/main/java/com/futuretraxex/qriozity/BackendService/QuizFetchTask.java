@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.webkit.URLUtil;
+import android.widget.ListAdapter;
 
 import com.futuretraxex.qriozity.Data.Question;
 import com.futuretraxex.qriozity.DataParser.RandomQuestionParsing;
@@ -87,92 +88,14 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
     }
 
     public void updateUI()  {
-        PlayFragment.PlayView.question.setText("Q. " + Question.mQuestion);
-        PlayFragment.PlayView.option1.setText("A. " + Question.mOption1);
-        PlayFragment.PlayView.option2.setText("B. " + Question.mOption2);
-        PlayFragment.PlayView.option3.setText("C. " + Question.mOption3);
-        PlayFragment.PlayView.option4.setText("D. " + Question.mOption4);
-
-        PlayFragment.PlayView.option1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Question.verifyChoice(1) == true)    {
-                    SoundServ.playMusic(true);
-                    PlayFragment.PlayView.option1.setBackgroundResource(R.color.green);
-                }
-                else {
-                    SoundServ.playMusic(false);
-                    PlayFragment.PlayView.option1.setBackgroundResource(R.color.red);
-                    showCorrectAnswer();
-                }
-                fetchNextQuestion();
-            }
-        });
-        PlayFragment.PlayView.option2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Question.verifyChoice(2) == true)    {
-                    SoundServ.playMusic(true);
-                    PlayFragment.PlayView.option2.setBackgroundResource(R.color.green);
-                }
-                else {
-                    SoundServ.playMusic(false);
-                    PlayFragment.PlayView.option2.setBackgroundResource(R.color.red);
-                    showCorrectAnswer();
-                }
-                fetchNextQuestion();
-            }
-        });
-        PlayFragment.PlayView.option3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Question.verifyChoice(3) == true)    {
-                    SoundServ.playMusic(true);
-                    PlayFragment.PlayView.option3.setBackgroundResource(R.color.green);
-                }
-                else {
-                    SoundServ.playMusic(false);
-                    PlayFragment.PlayView.option3.setBackgroundResource(R.color.red);
-                    showCorrectAnswer();
-                }
-                fetchNextQuestion();
-            }
-        });
-        PlayFragment.PlayView.option4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Question.verifyChoice(4) == true) {
-                    SoundServ.playMusic(true);
-                    PlayFragment.PlayView.option4.setBackgroundResource(R.color.green);
-                } else {
-                    SoundServ.playMusic(false);
-                    PlayFragment.PlayView.option4.setBackgroundResource(R.color.red);
-                    showCorrectAnswer();
-                }
-                fetchNextQuestion();
-            }
-        });
+        //Do nothing?
+        Question.mOptionsList.updateResults();
 
     }
 
 
 
     void showCorrectAnswer()    {
-        switch(Question.mAnswer)    {
-            case 1:
-                PlayFragment.PlayView.option1.setBackgroundResource(R.color.green);
-                break;
-            case 2:
-                PlayFragment.PlayView.option2.setBackgroundResource(R.color.green);
-                break;
-            case 3:
-                PlayFragment.PlayView.option3.setBackgroundResource(R.color.green);
-                break;
-            case 4:
-                PlayFragment.PlayView.option4.setBackgroundResource(R.color.green);
-                break;
-            default:
-        }
     }
 
     void fetchNextQuestion()    {
@@ -180,10 +103,7 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                PlayFragment.PlayView.option1.setBackgroundResource(0);
-                PlayFragment.PlayView.option2.setBackgroundResource(0);
-                PlayFragment.PlayView.option3.setBackgroundResource(0);
-                PlayFragment.PlayView.option4.setBackgroundResource(0);
+
                 QuizFetchTask qTask = new QuizFetchTask();
                 try {
                     qTask.execute(new URL("http://192.168.1.3:3002/v1/getRandomQuestion"));

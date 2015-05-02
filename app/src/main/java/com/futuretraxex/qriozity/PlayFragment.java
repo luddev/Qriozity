@@ -1,5 +1,6 @@
 package com.futuretraxex.qriozity;
 
+import android.database.DataSetObserver;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,9 +10,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.futuretraxex.qriozity.BackendService.QuizFetchTask;
+import com.futuretraxex.qriozity.Data.Question;
+import com.futuretraxex.qriozity.Data.QuestionList;
 import com.futuretraxex.qriozity.Resource.SoundServ;
 
 import java.net.MalformedURLException;
@@ -21,6 +28,7 @@ import java.net.URL;
  * Created by lud on 4/24/2015.
  */
 public class PlayFragment extends Fragment {
+
 
     public PlayFragment() {
         super();
@@ -35,6 +43,16 @@ public class PlayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_play, container, false);
         PlayView.initPlayView(rootView);
+        Question.init(getActivity());
+
+
+        PlayView.optionList.setAdapter(Question.mOptionsList);
+        PlayView.optionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
         SoundServ.setContext(getActivity());
         QuizFetchTask qTask = new QuizFetchTask();
         try {
@@ -57,19 +75,12 @@ public class PlayFragment extends Fragment {
     }
 
     public static class PlayView {
-        public static TextView question;
-        public static TextView option1;
-        public static TextView option2;
-        public static TextView option3;
-        public static TextView option4;
+
+        public static ListView optionList;
 
         public static void initPlayView(View rootView)    {
             try {
-                question = (TextView)rootView.findViewById(R.id.question);
-                option1 = (TextView)rootView.findViewById(R.id.option1);
-                option2 = (TextView)rootView.findViewById(R.id.option2);
-                option3 = (TextView)rootView.findViewById(R.id.option3);
-                option4 = (TextView)rootView.findViewById(R.id.option4);
+                optionList = (ListView)rootView.findViewById(R.id.optionList);
             }
             catch (NullPointerException ne) {
                 //Do Nothing.

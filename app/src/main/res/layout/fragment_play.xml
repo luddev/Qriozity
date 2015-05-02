@@ -4,95 +4,10 @@
     android:layout_height="match_parent" tools:context="com.futuretraxex.qriozity.PlayFragment"
     android:background="#232323"
     >
-
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        android:orientation="vertical"
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#232323">
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-        <TextView
-            android:fontFamily="cursive"
-            android:textSize="100px"
-            android:id="@+id/question"
-            tools:text="Q. This is a Test Question ?"
-            android:textColor="#FFFFFF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:background="#232323"/>
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-        <TextView
-            android:textColor="#FFFFFF"
-            android:fontFamily="cursive"
-            android:id="@+id/option1"
-            android:layout_marginTop="30px"
-            android:layout_marginBottom="30px"
-            android:textSize="60px"
-            tools:text="Test 123123123"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"/>
+        android:id="@+id/optionList">
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-        <TextView
-            android:textColor="#FFFFFF"
-            android:fontFamily="cursive"
-            android:id="@+id/option2"
-            android:layout_marginTop="30px"
-            android:layout_marginBottom="30px"
-            android:textSize="60px"
-            tools:text="Test 123123123"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"/>
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-        <TextView
-            android:textColor="#FFFFFF"
-            android:fontFamily="cursive"
-            android:textSize="60px"
-            android:layout_marginTop="30px"
-            android:layout_marginBottom="30px"
-            android:id="@+id/option3"
-            tools:text="Test 123123123 I mean wth, we can do stuff over and over again. "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"/>
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-        <TextView
-            android:textColor="#FFFFFF"
-            android:fontFamily="cursive"
-            android:layout_marginTop="30px"
-            android:layout_marginBottom="30px"
-            android:textSize="60px"
-            android:id="@+id/option4"
-            tools:text="Test 123123123"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            />
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-    </LinearLayout>
+    </ListView>
 </FrameLayout>
