@@ -10,8 +10,10 @@
         android:id="@+id/question"
         tools:text="Test"
         android:textColor="@color/white"
-        android:textSize="80px"
+        android:textSize="90px"
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight"/>
 
 </LinearLayout>

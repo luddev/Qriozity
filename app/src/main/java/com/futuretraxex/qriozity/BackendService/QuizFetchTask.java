@@ -89,8 +89,8 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
 
     public void updateUI()  {
         //Do nothing?
+        Log.w("UI UPDATE", "Updating Result");
         Question.mOptionsList.updateResults();
-
     }
 
 
@@ -98,21 +98,4 @@ public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
     void showCorrectAnswer()    {
     }
 
-    void fetchNextQuestion()    {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                QuizFetchTask qTask = new QuizFetchTask();
-                try {
-                    qTask.execute(new URL("http://192.168.1.3:3002/v1/getRandomQuestion"));
-                }
-                catch (MalformedURLException mfExc) {
-
-                }
-
-            }
-        },2000);
-    }
 }

@@ -47,12 +47,6 @@ public class PlayFragment extends Fragment {
 
 
         PlayView.optionList.setAdapter(Question.mOptionsList);
-        PlayView.optionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
         SoundServ.setContext(getActivity());
         QuizFetchTask qTask = new QuizFetchTask();
         try {

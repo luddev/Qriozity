@@ -1,7 +1,19 @@
 package com.futuretraxex.qriozity.Data;
 
 import android.content.Context;
+import android.os.Handler;
 import android.text.Html;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+
+import com.futuretraxex.qriozity.BackendService.QuizFetchTask;
+import com.futuretraxex.qriozity.PlayFragment;
+import com.futuretraxex.qriozity.R;
+import com.futuretraxex.qriozity.Resource.SoundServ;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by lud on 4/28/2015.
@@ -22,7 +34,53 @@ public class Question {
 
     public static void init(Context context)    {
         mOptionsList = new QuestionList(context);
+        final Context lContext = context;
+        PlayFragment.PlayView.optionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(Question.verifyChoice(i))    {
+                    SoundServ.playMusic(true);
+                    view.setBackgroundColor(lContext.getResources().getColor(R.color.green));
+                }
+                else {
+                    SoundServ.playMusic(false);
+                    showCorrect(i);
+                }
+                fetchNextQuestion();
+            }
+
+            public void showCorrect(int position)   {
+                //View view1 = Question.mOptionsList.getView(position,null,null);
+                View view1 = PlayFragment.PlayView.optionList.getChildAt(position);
+                view1.setBackgroundColor(lContext.getResources().getColor(R.color.red));
+                view1 = PlayFragment.PlayView.optionList.getChildAt(position);
+                View view2 = PlayFragment.PlayView.optionList.getChildAt(mAnswer);
+                //View view2 = Question.mOptionsList.getView(mAnswer, null, null);
+                view2.setBackgroundColor(lContext.getResources().getColor(R.color.green));
+            }
+
+            void fetchNextQuestion()    {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        QuizFetchTask qTask = new QuizFetchTask();
+                        try {
+                            qTask.execute(new URL("http://192.168.1.3:3002/v1/getRandomQuestion"));
+                        } catch (MalformedURLException mfExc) {
+
+                        }
+
+                    }
+                }, 1250);
+            }
+
+        });
+
     }
+
+
 
     public static void setQuestion(long id, String question, String option1, String option2, String option3, String option4, int answer, String datePublished)    {
         mId = id;

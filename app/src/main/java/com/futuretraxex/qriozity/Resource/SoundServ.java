@@ -25,7 +25,6 @@ public class SoundServ {
     }
 
     public static void playMusic(boolean isCorrect)    {
-        MediaPlayer mp;
         if(isCorrect)   {
             correctMp.start();
 
