@@ -11,7 +11,7 @@
     </string>
 
     <string name="pref_title_user_name">Display name</string>
-    <string name="pref_default_display_name">Qriozity User</string>
+    <string name="pref_default_display_name">quser</string>
 
     <string name="pref_stats">Reset Stats</string>
     <string name="key_sound">sound</string>

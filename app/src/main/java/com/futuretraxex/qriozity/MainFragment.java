@@ -4,8 +4,13 @@ package com.futuretraxex.qriozity;
  * Created by lud on 4/23/2015.
  */
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -29,6 +35,31 @@ public class MainFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_username, null);
+        final SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        final Context self = getActivity();
+        if(settings.getString(getString(R.string.key_username),"quser").equals("quser"))   {
+            new AlertDialog.Builder(getActivity()).setTitle("Username")
+                    .setView(dialogView)
+                    .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            TextView username = (TextView)dialogView.findViewById(R.id.username_dlg);
+                            if(username == null)    {
+                                Toast.makeText(self,"Oops.",Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                settings.edit().putString(getString(R.string.key_username),username.getText().toString() ).apply();
+                                Toast.makeText(self,"Registered : " + username.getText().toString(),Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).show();
+        }
     }
 
     @Override
