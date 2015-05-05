@@ -2,6 +2,7 @@ package com.futuretraxex.qriozity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -24,5 +25,6 @@ public class PlayActivity extends ActionBarActivity {
                     .commit();
         }
     }
+
 }
 

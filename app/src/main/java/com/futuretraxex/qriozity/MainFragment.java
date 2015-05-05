@@ -51,6 +51,24 @@ public class MainFragment extends Fragment {
             }
         });
 
+        final ImageButton stats = (ImageButton)rootView.findViewById(R.id.statst);
+        stats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent statIntent = new Intent(getActivity(), StatsActivity.class);
+                startActivity(statIntent);
+            }
+        });
+
+        final ImageButton exit = (ImageButton)rootView.findViewById(R.id.exit);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getActivity().finish();
+            }
+        });
+
         return rootView;
     }
 

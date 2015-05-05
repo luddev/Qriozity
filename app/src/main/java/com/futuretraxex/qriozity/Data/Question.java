@@ -15,6 +15,8 @@ import com.futuretraxex.qriozity.Resource.SoundServ;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import io.realm.Realm;
+
 /**
  * Created by lud on 4/28/2015.
  * As only one instance of question will be visible at a time , this instance is linked with UI.
@@ -38,15 +40,52 @@ public class Question {
         PlayFragment.PlayView.optionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(Question.verifyChoice(i))    {
-                    SoundServ.playMusic(true);
-                    view.setBackgroundColor(lContext.getResources().getColor(R.color.green));
+                if(i != 0)  {
+                    if(Question.verifyChoice(i))    {
+                        SoundServ.playMusic(true);
+                        view.setBackgroundColor(lContext.getResources().getColor(R.color.green));
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                StatsPersistence.mRealm.executeTransaction(new Realm.Transaction() {
+                                    @Override
+                                    public void execute(Realm realm) {
+                                        StatsPersistence.mStat.setmTotalAttempted(StatsPersistence.mStat.getmTotalAttempted() + 1);
+                                        StatsPersistence.mStat.setmCorrect(StatsPersistence.mStat.getmCorrect() + 1);
+                                    }
+                                });
+
+
+
+                            }
+                        });
+                    }
+                    else {
+                        SoundServ.playMusic(false);
+                        showCorrect(i);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                StatsPersistence.mRealm.executeTransaction(new Realm.Transaction() {
+                                    @Override
+                                    public void execute(Realm realm) {
+                                        StatsPersistence.mStat.setmTotalAttempted(StatsPersistence.mStat.getmTotalAttempted() + 1);
+                                        StatsPersistence.mStat.setmWrong(StatsPersistence.mStat.getmWrong() + 1);
+                                    }
+                                });
+
+
+                            }
+                        });
+
+                    }
+                    fetchNextQuestion();
+
                 }
                 else {
-                    SoundServ.playMusic(false);
-                    showCorrect(i);
+                    //Do Nothing
                 }
-                fetchNextQuestion();
+
             }
 
             public void showCorrect(int position)   {
@@ -64,7 +103,7 @@ public class Question {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
+                        SoundServ.reset();
                         QuizFetchTask qTask = new QuizFetchTask();
                         try {
                             qTask.execute(new URL("http://192.168.1.3:3002/v1/getRandomQuestion"));

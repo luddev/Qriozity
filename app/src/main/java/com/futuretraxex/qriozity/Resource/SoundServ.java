@@ -35,4 +35,9 @@ public class SoundServ {
 
     }
 
+    public static void reset()  {
+        correctMp.reset();
+        incorrectMp.reset();
+    }
+
 }

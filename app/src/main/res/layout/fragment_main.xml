@@ -46,17 +46,7 @@
             android:layout_marginTop="20px"
             android:layout_marginBottom="30px"
             android:src="@drawable/stats"
-            android:id="@+id/stats"
-            android:layout_gravity="center"
-            android:clickable="true"
-            />
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20px"
-            android:layout_marginBottom="30px"
-            android:src="@drawable/options"
-            android:id="@+id/options"
+            android:id="@+id/statst"
             android:layout_gravity="center"
             android:clickable="true"
             />
