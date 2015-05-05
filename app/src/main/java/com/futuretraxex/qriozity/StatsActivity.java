@@ -1,9 +1,17 @@
 package com.futuretraxex.qriozity;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -13,12 +21,10 @@ public class StatsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-        Toast.makeText(this,"Failed Before Transaction", Toast.LENGTH_SHORT).show();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.stats_container, new StatsActivityFragment())
                     .commit();
-            Toast.makeText(this,"Failed After Transaction", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -39,6 +45,8 @@ public class StatsActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this,SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
 

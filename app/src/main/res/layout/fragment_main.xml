@@ -7,6 +7,7 @@
     tools:context="com.futuretraxex.qriozity.MainFragment"
     android:orientation="vertical"
     android:layout_gravity="center"
+    android:background="@drawable/main_button_touch"
     >
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,6 +34,7 @@
         android:orientation="vertical"
         android:paddingTop="@dimen/abc_action_bar_default_height_material">
         <ImageButton
+            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30px"
@@ -41,6 +43,7 @@
             android:layout_gravity="center"
             android:clickable="true"/>
         <ImageButton
+            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20px"
@@ -51,6 +54,7 @@
             android:clickable="true"
             />
         <ImageButton
+            android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20px"

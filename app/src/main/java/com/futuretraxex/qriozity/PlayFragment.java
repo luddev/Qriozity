@@ -37,6 +37,7 @@ public class PlayFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        SoundServ.setContext(getActivity());
     }
 
     @Override
@@ -45,9 +46,8 @@ public class PlayFragment extends Fragment {
         PlayView.initPlayView(rootView);
         Question.init(getActivity());
 
-
         PlayView.optionList.setAdapter(Question.mOptionsList);
-        SoundServ.setContext(getActivity());
+
         QuizFetchTask qTask = new QuizFetchTask();
         try {
             Log.w("Do In BACKGROUND", "EWxecuting Task");

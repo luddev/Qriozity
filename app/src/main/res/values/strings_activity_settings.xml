@@ -1,0 +1,20 @@
+<resources>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_sound">Enable Sound</string>
+    <string name="pref_sound_description">Turn sound On/Off if it gets too annoying.
+    </string>
+
+    <string name="pref_title_user_name">Display name</string>
+    <string name="pref_default_display_name">Qriozity User</string>
+
+    <string name="pref_stats">Reset Stats</string>
+    <string name="key_sound">sound</string>
+    <string name="key_username">username</string>
+    <string name="key_stats">stats</string>
+</resources>

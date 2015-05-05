@@ -4,16 +4,19 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     tools:context="com.futuretraxex.qriozity.PlayFragment"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/question_option_touch">
     <TextView
         android:id="@+id/option"
         tools:text="Test"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:fontFamily="monospace"
         android:textSize="50px"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/listPreferredItemHeight"
+
         />
 
 </LinearLayout>

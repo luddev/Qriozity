@@ -5,4 +5,10 @@
     <color name="black">#ff000000</color>
     <color name="green">#01DF01</color>
     <color name="red">#DF0101</color>
+    <color name="grey">#cccccc</color>
+    <color name="grey_700">#646464</color>
+
+    <color name="qriozity_light_purple">#aa66cc</color>
+    <color name="qriozity_purple">#a041d0</color>
+    <color name="qriozity_dark_purple">#9933cc</color>
 </resources>

@@ -44,39 +44,50 @@ public class Question {
                     if(Question.verifyChoice(i))    {
                         SoundServ.playMusic(true);
                         view.setBackgroundColor(lContext.getResources().getColor(R.color.green));
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                StatsPersistence.mRealm.executeTransaction(new Realm.Transaction() {
-                                    @Override
-                                    public void execute(Realm realm) {
-                                        StatsPersistence.mStat.setmTotalAttempted(StatsPersistence.mStat.getmTotalAttempted() + 1);
-                                        StatsPersistence.mStat.setmCorrect(StatsPersistence.mStat.getmCorrect() + 1);
-                                    }
-                                });
+                        StatsPersistence.beginTransaction();
+                        StatsPersistence.mStat.setmTotalAttempted(StatsPersistence.mStat.getmTotalAttempted() + 1);
+                        StatsPersistence.mStat.setmCorrect(StatsPersistence.mStat.getmCorrect() + 1);
+                        Log.w("Test", "Updated Stats : Total " + StatsPersistence.mStat.getmTotalAttempted());
+                        Log.w("Test", "Updated Stats : Correct Answer" + StatsPersistence.mStat.getmCorrect());
+                        StatsPersistence.commitTransaction();
 
-
-
-                            }
-                        });
+//                        new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                StatsPersistence.mRealm.executeTransaction(new Realm.Transaction() {
+//                                    @Override
+//                                    public void execute(Realm realm) {
+//
+//                                    }
+//                                });
+//
+//
+//
+//                            }
+//                        });
                     }
                     else {
                         SoundServ.playMusic(false);
                         showCorrect(i);
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                StatsPersistence.mRealm.executeTransaction(new Realm.Transaction() {
-                                    @Override
-                                    public void execute(Realm realm) {
-                                        StatsPersistence.mStat.setmTotalAttempted(StatsPersistence.mStat.getmTotalAttempted() + 1);
-                                        StatsPersistence.mStat.setmWrong(StatsPersistence.mStat.getmWrong() + 1);
-                                    }
-                                });
-
-
-                            }
-                        });
+                        StatsPersistence.beginTransaction();
+                        StatsPersistence.mStat.setmTotalAttempted(StatsPersistence.mStat.getmTotalAttempted() + 1);
+                        StatsPersistence.mStat.setmWrong(StatsPersistence.mStat.getmWrong() + 1);
+                        Log.w("Test", "Updated Stats : Total " + StatsPersistence.mStat.getmTotalAttempted());
+                        Log.w("Test", "Updated Stats : Wrong Answer" + StatsPersistence.mStat.getmWrong());
+                        StatsPersistence.commitTransaction();
+//                        new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                StatsPersistence.mRealm.executeTransaction(new Realm.Transaction() {
+//                                    @Override
+//                                    public void execute(Realm realm) {
+//
+//                                    }
+//                                });
+//
+//
+//                            }
+//                        });
 
                     }
                     fetchNextQuestion();

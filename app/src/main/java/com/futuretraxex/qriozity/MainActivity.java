@@ -1,5 +1,8 @@
 package com.futuretraxex.qriozity;
 
+import android.content.Intent;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import com.futuretraxex.qriozity.Data.StatsPersistence;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -19,11 +24,15 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StatsPersistence.initStatsDB(this);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_container, new MainFragment())
                     .commit();
         }
+
+
+
     }
 
 
@@ -43,6 +52,8 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this,SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
 
