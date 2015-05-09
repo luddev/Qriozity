@@ -1,19 +1,14 @@
 package com.futuretraxex.qriozity.BackendService;
 
-import android.media.MediaPlayer;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
-import android.webkit.URLUtil;
-import android.widget.ListAdapter;
 
 import com.futuretraxex.qriozity.Data.Question;
 import com.futuretraxex.qriozity.DataParser.RandomQuestionParsing;
-import com.futuretraxex.qriozity.PlayFragment;
-import com.futuretraxex.qriozity.R;
-import com.futuretraxex.qriozity.Resource.SoundServ;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,8 +21,17 @@ import java.net.URL;
  */
 public class QuizFetchTask extends AsyncTask<URL, Integer, String> {
 
-    public String API_URL = "http://api.futuretraxex.com/";
+    public String API_URL_TYPE = "http://";
+    public String API_URL;
     public String API_FETCH_RANDOM = "v1/getRandomQuestion";
+    public String API_PREF_URL;
+
+    public QuizFetchTask(Context context){
+        SharedPreferences setting = PreferenceManager.getDefaultSharedPreferences(context);
+        API_PREF_URL = setting.getString("urlname", "");
+        Log.w("FP", API_PREF_URL);
+        API_URL = API_URL_TYPE + API_PREF_URL + "/";
+    }
 
 
     @Override

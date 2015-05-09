@@ -1,24 +1,18 @@
 package com.futuretraxex.qriozity;
 
-import android.database.DataSetObserver;
-import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.futuretraxex.qriozity.BackendService.QuizFetchTask;
 import com.futuretraxex.qriozity.Data.Question;
-import com.futuretraxex.qriozity.Data.QuestionList;
 import com.futuretraxex.qriozity.Resource.SoundServ;
 
 import java.net.MalformedURLException;
@@ -46,12 +40,13 @@ public class PlayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_play, container, false);
+        Context context = getActivity();
         PlayView.initPlayView(rootView);
-        Question.init(getActivity());
+        Question.init(context);
 
         PlayView.optionList.setAdapter(Question.mOptionsList);
 
-        QuizFetchTask qTask = new QuizFetchTask();
+        QuizFetchTask qTask = new QuizFetchTask(context);
         try {
             Log.w("Do In BACKGROUND", "EWxecuting Task");
             qTask.execute(new URL("http://192.168.1.3:3002/v1/getRandomQuestion"));

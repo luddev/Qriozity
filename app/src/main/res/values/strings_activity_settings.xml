@@ -11,10 +11,13 @@
     </string>
 
     <string name="pref_title_user_name">Display name</string>
+    <string name="pref_title_url_name">Enter URL</string>
     <string name="pref_default_display_name">quser</string>
+    <string name="pref_default_url_name">api.futuretraxex.com</string>
 
     <string name="pref_stats">Reset Stats</string>
     <string name="key_sound">sound</string>
     <string name="key_username">username</string>
     <string name="key_stats">stats</string>
+    <string name="key_url_name">urlname</string>
 </resources>

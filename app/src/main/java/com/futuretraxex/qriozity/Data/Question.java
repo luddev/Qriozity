@@ -15,8 +15,6 @@ import com.futuretraxex.qriozity.Resource.SoundServ;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import io.realm.Realm;
-
 /**
  * Created by lud on 4/28/2015.
  * As only one instance of question will be visible at a time , this instance is linked with UI.
@@ -31,10 +29,12 @@ public class Question {
     public static int mAnswer;
     public static String mDatePublished;
     public static QuestionList mOptionsList;
+    //private static Context contextGlobal;
 
 
 
-    public static void init(Context context)    {
+    public static void init(final Context context)    {
+        //contextGlobal = context;
         mOptionsList = new QuestionList(context);
         final Context lContext = context;
         PlayFragment.PlayView.optionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -115,7 +115,7 @@ public class Question {
                     @Override
                     public void run() {
                         SoundServ.reset();
-                        QuizFetchTask qTask = new QuizFetchTask();
+                        QuizFetchTask qTask = new QuizFetchTask(context);
                         try {
                             qTask.execute(new URL("http://192.168.1.3:3002/v1/getRandomQuestion"));
                         } catch (MalformedURLException mfExc) {
