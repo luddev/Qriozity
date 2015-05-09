@@ -28,7 +28,6 @@ public class SoundServ {
 
     public static void playMusic(boolean isCorrect)    {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
-
         if(isCorrect && settings.getBoolean("sound",true))   {
             correctMp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
